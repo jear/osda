@@ -1,0 +1,47 @@
+{
+  "taskName": "notitle",
+  "hosts": [
+    {
+      "iloIPAddr": "10.188.2.12",
+      "iloUser": "v0175usradmin",
+      "iloPassword": "iloPassword",
+      "hostName": "host93",
+      "osPackage": "HPE-SLES15.iso",
+      "osLicenseKey": "",
+      "sshKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDJ5UGE8u52z5hhcsrhoqK/oXL2aFMj3W1YwhFgPuaw+LNtkRM0ec6Oal+MH9tocp4XORcsDgdZbobrx689SLfWFiomPFSuDm+j3DeHPMSa7dWFcG2lKtXBJhewuRDn9crlMc8aWNL0MIhpeYxkCWpqc5w4RMw4vJBrOF+eHKb7Rq7GsWCXGUIw7y9uSZiGRffXApm84iW0f0imiurR/crxZQwvoAm/QNxIrovPc5jTqSlNOrMKgU16JfU+FhQJn2VM9QZWlPaHsXqHS4FodDT6ApyYGIbAeyoPUYl2bFpRZnbdQ6GgMfC6pWuD0qfEUTzCuMIPDQeclCWYg+AFno1D root@osda-avinash-host",
+      "kickstartFile": "autoinst_bond.xml",
+      "httpProxy": "http://proxy.houston.corp.net:8080",
+      "httpsProxy": "http://web-proxy.corp.hpecorp.net:8080",
+      "noProxy": "",
+      "networks": [
+      {
+	"ipAddr": "10.188.175.93",
+	"netmask": "255.255.255.0",
+	"gateway": "10.188.175.1",
+	"dns": "10.188.0.2",
+	"bootProto": "static",
+	"nic1": {
+	  "adapterId": "1",
+	  "portId": 1
+	},
+	"nic2": {
+	  "adapterId": "2",
+	  "portId": 1
+	}
+      }
+      ],
+      "osDrive": {
+        "logicalDrive": {
+          "driveTechnology": "SAS HDD",
+          "capacity": "1",
+          "capacityUnit": "TB",
+          "raidLevel": "Raid1",
+          "logicalDriveNumber": 1,
+          "operation": "USE_EXISTING"
+        }
+      }
+    }
+  ], 
+  "deploymentMode": "hpeilo",
+  "oneviewDetails": {}
+}

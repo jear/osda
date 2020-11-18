@@ -1,0 +1,51 @@
+#!/usr/bin/env python
+
+import configparser as parse
+import os
+import osda.server
+
+# TODO: Generalize path irrespective of operating system
+configPath = "/opt/hpe/osda/etc"
+logPath = "/opt/hpe/osda/log"
+
+configFile = os.path.join(configPath, 'config.ini')
+
+defaults = {
+    'port': "5000",
+    'log_path': logPath,
+    'log_level': "INFO"
+}
+
+conf = parse.ConfigParser(defaults=defaults)
+conf.read(configFile)
+
+server = conf.get('DEFAULT', 'server').strip(' \'"')
+#port   = conf.get('DEFAULT', 'port').strip(' \'"')
+#
+#logPath  = conf.get('logging', 'log_path').strip(' \'"')
+#logLevel = conf.get('logging', 'log_level').strip(' \'"')
+
+port   = conf.get('DEFAULT', 'port')
+logPath  = conf.get('logging', 'log_path')
+logLevel = conf.get('logging', 'log_level')
+
+if not port:
+   port = defaults.get('port')
+
+if not logPath:
+   logPath = defaults.get('log_path')
+
+if not logLevel:
+   logLevel = defaults.get('log_level')
+
+port = int(port)
+
+userConfig = {
+    'server': server,
+    'port': port,
+    'logPath': logPath,
+    'logLevel': logLevel
+}
+
+
+osda.server.start(userConfig)

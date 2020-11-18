@@ -1,0 +1,48 @@
+{
+  "taskName": "notitle",
+  "hosts": [
+    {
+      "serverProfile": "SLES_1NIC_2NET",
+      "hostName": "host87",
+      "osPackage": "HPE-SLES15.iso",
+      "kickstartFile": "two_nic_vlan_autoinst.xml",
+      "httpProxy": "http://web-proxy.corp.hpecorp.net:8080",
+      "httpsProxy": "http://web-proxy.corp.hpecorp.net:8080",
+      "noProxy": "",
+      "networks": [
+      {
+	"ipAddr": "10.188.210.87",
+	"netmask": "255.255.255.0",
+	"gateway": "10.188.210.1",
+	"dns": "10.188.0.2",
+	"bootProto": "static",
+	"vlans": "210",
+	"nic1": {
+          "connectionName": "nic0"
+	}
+      },
+      {
+	"ipAddr": "10.188.211.87",
+	"netmask": "255.255.255.0",
+	"dns": "10.188.0.2",
+	"gateway": "10.188.211.1",
+	"bootProto": "static",
+	"vlans": "211",
+	"nic1": {
+          "connectionName": "nic1"
+	}
+      }
+      ],
+      "osDrive": {
+        "driveName": "localosdrive"
+      }
+    }
+  ],
+  "osPackage": "HPE-SLES15.iso",
+  "deploymentMode": "hpesynergy",
+  "createServerProfile": false,
+  "oneviewDetails": {
+    "ovName": "syn210",
+    "ovSPT": "SLES15-NW-SPT"
+  }
+}

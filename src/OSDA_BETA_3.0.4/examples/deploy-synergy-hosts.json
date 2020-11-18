@@ -1,0 +1,29 @@
+{
+  "taskName": "notitle",
+  "hosts": [
+    {
+      "serverProfile": "sp22",
+      "hostName": "host23",
+      "ipAddr": "10.188.210.23",
+      "netmask": "255.255.255.0",
+      "gateway": "10.188.210.1",
+      "dns1": "10.188.0.2",
+      "dns2": "10.188.0.3",
+      "bootProto": "static",
+      "osPackage": "VMware_ESXi_7.0.0_15843807_HPE_700.0.0.10.5.0.108_April2020",
+      "mgmtNIC": {
+        "connectionName": "vmnic0"
+      },
+      "osDrive": {
+        "driveName": "localosdrive"
+      }
+    }
+  ],
+  "osPackage": "VMware_ESXi_7.0.0_15843807_HPE_700.0.0.10.5.0.108_April2020",
+  "deploymentMode": "hpesynergy",
+  "createServerProfile": false,
+  "oneviewDetails": {
+    "ovName": "syn0210",
+    "ovSPT": "ESXi-OSDA-SPT1"
+  }
+}

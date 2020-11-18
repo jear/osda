@@ -1,0 +1,43 @@
+- hosts: localhost
+  vars:
+  - input_json: "./deploy_ilo.json"
+  tasks:
+  - uri:
+      body_format: json
+      body: "{{ lookup('file', input_json) }}"
+      method: POST
+      url: http://10.188.210.14:5000/rest/deploy
+      user: avinash
+      password: avinash
+      use_proxy: no
+    register: deployList
+
+  - debug:
+      msg: "{{ deployList.json.result}} "
+
+  - uri:
+      body_format: json
+      method: GET
+      url: http://10.188.210.14:5000/rest/tasks/{{deployList.json.result.taskID}}
+      user: avinash
+      password: avinash
+      use_proxy: no
+    register: taskList
+
+  - debug:
+      msg: "{{ taskList.json.result }} "
+
+  - uri:
+      body_format: json
+      method: GET
+      url: http://10.188.210.14:5000/rest/tasks/{{deployList.json.result.taskID}}
+      user: avinash
+      password: avinash
+      use_proxy: no
+    register: taskList
+
+  - debug:
+      msg: "{{ item.status }} "
+    loop: "{{ taskList.json.result.subTasks }}"
+    when: taskList.json.result is defined
+

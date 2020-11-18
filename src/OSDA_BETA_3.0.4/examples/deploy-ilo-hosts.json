@@ -1,0 +1,42 @@
+{
+  "taskName": "notitle",
+  "hosts": [
+    {
+      "iloIPAddr": "10.188.2.12",
+      "iloUser": "v0175usradmin",
+      "iloPassword": "HP!nvent123",
+      "hostName": "host342",
+      "osPackage": "CentOS-7-x86_64-Minimal-2003",
+      "kickstartFile": "",
+      "networks": [
+        {
+          "ipAddr": "10.188.175.57",
+          "netmask": "255.255.255.0",
+          "gateway": "10.188.175.1",
+          "dns": "10.188.0.2,10.188.0.3",
+          "bootProto": "static",
+          "NIC1": {
+            "adapterId": "1",
+            "portId": 1
+          },
+          "NIC2": {
+            "adapterId": "1",
+            "portId": 2
+          },
+          "bondingType": ""
+        },
+        {}
+      ],
+      "osDrive": {
+        "logicalDrive": {
+          "logicalDriveNumber": 1,
+          "operation": "USE_EXISTING"
+        }
+      }
+    }
+  ],
+  "osPackage": "CentOS-7-x86_64-Minimal-2003",
+  "deploymentMode": "hpeilo",
+  "createServerProfile": true,
+  "oneviewDetails": {}
+}

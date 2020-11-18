@@ -1,0 +1,348 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <scripts>
+    <init-scripts config:type="list">
+      <script>
+        <filename>configDns.sh</filename>
+        <interpreter>shell</interpreter>
+        <source><![CDATA[
+#!/bin/sh
+dns="%DNS11%"
+if [ ! -z "$dns" ]; then
+  echo "DNS present"
+  dnsList=$(echo $dns | tr ',' ' ')
+  sed -i "s/NETCONFIG_DNS_STATIC_SERVERS.*/NETCONFIG_DNS_STATIC_SERVERS=\"$dnsList\"/"  /etc/sysconfig/network/config
+fi
+
+systemctl start network
+netconfig update -f
+]]>
+        </source>
+      </script>
+    </init-scripts>
+  </scripts>
+  <bootloader>
+    <global>
+      <append>splash=silent resume=/dev/system/swap mitigations=auto quiet crashkernel=170M,high crashkernel=72M,low</append>
+      <cpu_mitigations>auto</cpu_mitigations>
+      <gfxmode>auto</gfxmode>
+      <hiddenmenu>false</hiddenmenu>
+      <os_prober>false</os_prober>
+      <terminal>gfxterm</terminal>
+      <timeout config:type="integer">8</timeout>
+      <xen_kernel_append>vga=gfx-1024x768x16 crashkernel=242M\&lt;4G</xen_kernel_append>
+    </global>
+    <loader_type>grub2-efi</loader_type>
+  </bootloader>
+  <deploy_image>
+    <image_installation config:type="boolean">false</image_installation>
+  </deploy_image>
+  <firewall>
+    <enable_firewall config:type="boolean">false</enable_firewall>
+    <log_denied_packets>off</log_denied_packets>
+    <start_firewall config:type="boolean">false</start_firewall>
+  </firewall>
+  <general>
+    <ask-list config:type="list"/>
+    <mode>
+      <confirm config:type="boolean">false</confirm>
+    </mode>
+    <proposals config:type="list"/>
+    <signature-handling>
+      <accept_file_without_checksum config:type="boolean">true</accept_file_without_checksum>
+      <accept_non_trusted_gpg_key config:type="boolean">true</accept_non_trusted_gpg_key>
+      <accept_unknown_gpg_key config:type="boolean">true</accept_unknown_gpg_key>
+      <accept_unsigned_file config:type="boolean">true</accept_unsigned_file>
+      <accept_verification_failed config:type="boolean">true</accept_verification_failed>
+      <import_gpg_key config:type="boolean">true</import_gpg_key>
+    </signature-handling>
+    <storage>
+      <start_multipath config:type="boolean">false</start_multipath>
+    </storage>
+  </general>
+  <groups config:type="list">
+    <group>
+      <encrypted config:type="boolean">true</encrypted>
+      <gid>100</gid>
+      <group_password>x</group_password>
+      <groupname>users</groupname>
+      <userlist/>
+    </group>
+  </groups>
+  <suse_register>
+   <do_registration config:type="boolean">false</do_registration>
+   <email>%LICENSE_EMAIL%</email>
+   <reg_code>%LICENSE_KEY%</reg_code>
+   <install_updates config:type="boolean">true</install_updates>
+   <slp_discovery config:type="boolean">false</slp_discovery>
+   <addons config:type="list">
+   <addon>
+   <name>sle-module-basesystem</name>
+   <version>15.1</version>
+   <arch>x86_64</arch>
+   </addon>
+   </addons>
+  </suse_register>
+  <host>
+    <hosts config:type="list">
+      <hosts_entry>
+        <host_address>127.0.0.1</host_address>
+        <names config:type="list">
+          <name>localhost</name>
+        </names>
+      </hosts_entry>
+    </hosts>
+  </host>
+  <kdump>
+    <add_crash_kernel config:type="boolean">true</add_crash_kernel>
+    <crash_kernel config:type="list">
+      <listentry>170M,high</listentry>
+      <listentry>72M,low</listentry>
+    </crash_kernel>
+    <crash_xen_kernel>242M\&lt;4G</crash_xen_kernel>
+  </kdump>
+  <keyboard>
+    <keymap>english-us</keymap>
+  </keyboard>
+  <language>
+    <language>en_US</language>
+    <languages/>
+  </language>
+  <login_settings/>
+  <networking>
+    <dhcp_options>
+      <dhclient_client_id/>
+      <dhclient_hostname_option>AUTO</dhclient_hostname_option>
+    </dhcp_options>
+    <dns>
+      <dhcp_hostname config:type="boolean">true</dhcp_hostname>
+      <hostname>%HOSTNAME%</hostname>
+      <nameservers config:type="list"/>
+      <resolv_conf_policy>auto</resolv_conf_policy>
+      <write_hostname config:type="boolean">false</write_hostname>
+    </dns>
+    <interfaces config:type="list">
+      <interface>
+        <bootproto>static</bootproto>
+        <device>eth0</device>
+        <ipaddr>%IPADDR1%</ipaddr>
+        <prefixlen>%CIDR1%</prefixlen>
+        <gateway>%GATEWAY1%</gateway>
+        <startmode>auto</startmode>
+      </interface>
+      <interface>
+        <bootproto>static</bootproto>
+        <device>lo</device>
+        <firewall>no</firewall>
+        <ipaddr>127.0.0.1</ipaddr>
+        <netmask>255.0.0.0</netmask>
+        <network>127.0.0.0</network>
+        <prefixlen>8</prefixlen>
+        <startmode>nfsroot</startmode>
+        <usercontrol>no</usercontrol>
+      </interface>
+    </interfaces>
+    <ipv6 config:type="boolean">false</ipv6>
+    <keep_install_network config:type="boolean">true</keep_install_network>
+    <setup_before_proposal config:type="boolean">true</setup_before_proposal>
+    <managed config:type="boolean">false</managed>
+    <routing>
+      <ipv4_forward config:type="boolean">false</ipv4_forward>
+      <ipv6_forward config:type="boolean">false</ipv6_forward>
+      <routes config:type="list">
+        <route>
+          <destination>default</destination>
+          <device>eth0</device>
+          <gateway>%GATEWAY1%</gateway>
+        </route>
+      </routes>
+    </routing>
+    <net-udev config:type="list">
+      <rule>
+        <name>eth0</name>
+        <rule>ATTR{address}</rule>
+        <value>%MAC11%</value>
+      </rule>
+    </net-udev>
+  </networking>
+  <ntp-client>
+    <ntp_policy>auto</ntp_policy>
+    <ntp_servers config:type="list"/>
+    <ntp_sync>manual</ntp_sync>
+  </ntp-client>
+  <partitioning config:type="list">
+    <drive>
+      <device>/dev/disk/by-id/wwn-0x%DRIVEID%</device>
+      <initialize config:type="boolean">true</initialize>
+      <partitions config:type="list">
+        <partition>
+          <create config:type="boolean">true</create>
+          <mount>/boot/efi</mount>
+          <mountby config:type="symbol">uuid</mountby>
+          <size>auto</size>
+        </partition>
+        <partition>
+          <create config:type="boolean">true</create>
+          <format config:type="boolean">true</format>
+          <mount>/</mount>
+          <size>max</size>
+        </partition>
+        <partition>
+          <create config:type="boolean">true</create>
+          <format config:type="boolean">true</format>
+          <mount>swap</mount>
+          <size>auto</size>
+        </partition>
+      </partitions>
+      <use>all</use>
+    </drive>
+  </partitioning>
+  <proxy>
+    <enabled config:type="boolean">%ENABLE_PROXY%</enabled>
+    <ftp_proxy/>
+    <http_proxy>%HTTP_PROXY%</http_proxy>
+    <https_proxy>%HTTPS_PROXY%</https_proxy>
+    <no_proxy>%NO_PROXY%</no_proxy>
+    <proxy_password/>
+    <proxy_user/>
+  </proxy>
+  <report>
+    <errors>
+      <log config:type="boolean">true</log>
+      <show config:type="boolean">true</show>
+      <timeout config:type="integer">0</timeout>
+    </errors>
+    <messages>
+      <log config:type="boolean">true</log>
+      <show config:type="boolean">false</show>
+      <timeout config:type="integer">0</timeout>
+    </messages>
+    <warnings>
+      <log config:type="boolean">true</log>
+      <show config:type="boolean">false</show>
+      <timeout config:type="integer">0</timeout>
+    </warnings>
+    <yesno_messages>
+      <log config:type="boolean">true</log>
+      <show config:type="boolean">false</show>
+      <timeout config:type="integer">0</timeout>
+    </yesno_messages>
+  </report>
+  <services-manager>
+    <default_target>multi-user</default_target>
+    <services>
+      <disable config:type="list"/>
+      <enable config:type="list">
+        <service>YaST2-Firstboot</service>
+        <service>YaST2-Second-Stage</service>
+        <service>btrfsmaintenance-refresh</service>
+        <service>cron</service>
+        <service>firewalld</service>
+        <service>wickedd-auto4</service>
+        <service>wickedd-dhcp4</service>
+        <service>wickedd-dhcp6</service>
+        <service>wickedd-nanny</service>
+        <service>getty@tty1</service>
+        <service>haveged</service>
+        <service>issue-generator</service>
+        <service>kbdsettings</service>
+        <service>kdump</service>
+        <service>kdump-early</service>
+        <service>lvm2-monitor</service>
+        <service>wicked</service>
+        <service>purge-kernels</service>
+        <service>rollback</service>
+        <service>sshd</service>
+      </enable>
+      <on_demand config:type="list"/>
+    </services>
+  </services-manager>
+  <software>
+    <image/>
+    <install_recommended config:type="boolean">true</install_recommended>
+    <instsource/>
+    <packages config:type="list">
+      <package>yast2</package>
+      <package>xfsprogs</package>
+      <package>wicked</package>
+      <package>vim</package>
+      <package>snapper</package>
+      <package>sles-release</package>
+      <package>shim</package>
+      <package>openssh</package>
+      <package>mokutil</package>
+      <package>lvm2</package>
+      <package>kpartx</package>
+      <package>kexec-tools</package>
+      <package>kdump</package>
+      <package>grub2-x86_64-efi</package>
+      <package>glibc</package>
+      <package>firewalld</package>
+      <package>e2fsprogs</package>
+      <package>dosfstools</package>
+      <package>btrfsprogs</package>
+    </packages>
+    <patterns config:type="list">
+      <pattern>base</pattern>
+      <pattern>minimal_base</pattern>
+    </patterns>
+    <products config:type="list">
+      <product>SLES</product>
+    </products>
+  </software>
+  <ssh_import>
+    <copy_config config:type="boolean">false</copy_config>
+    <import config:type="boolean">false</import>
+  </ssh_import>
+  <timezone>
+    <hwclock>UTC</hwclock>
+    <timezone>America/Chicago</timezone>
+  </timezone>
+  <user_defaults>
+    <expire/>
+    <group>100</group>
+    <groups/>
+    <home>/home</home>
+    <inactive>-1</inactive>
+    <no_groups config:type="boolean">true</no_groups>
+    <shell>/bin/bash</shell>
+    <skel>/etc/skel</skel>
+    <umask>022</umask>
+  </user_defaults>
+  <users config:type="list">
+    <user>
+      <authorized_keys config:type="list"/>
+      <encrypted config:type="boolean">false</encrypted>
+      <fullname>gse</fullname>
+      <gid>100</gid>
+      <home>/home/gse</home>
+      <home_btrfs_subvolume config:type="boolean">false</home_btrfs_subvolume>
+      <password_settings>
+        <expire/>
+        <flag/>
+        <inact/>
+        <max>99999</max>
+        <min>0</min>
+        <warn>7</warn>
+      </password_settings>
+      <shell>/bin/bash</shell>
+      <uid>1000</uid>
+      <user_password>Welcome#123</user_password>
+      <username>gse</username>
+    </user>
+    <user>
+      <encrypted config:type="boolean">false</encrypted>
+      <fullname>root</fullname>
+      <gid>0</gid>
+      <home>/root</home>
+      <shell>/bin/bash</shell>
+      <authorized_keys config:type="list">
+         <listentry>%SSH_KEY%</listentry>
+      </authorized_keys>
+      <uid>0</uid>
+      <user_password>Welcome#123</user_password>
+      <username>root</username>
+    </user>
+  </users>
+</profile>

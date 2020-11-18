@@ -1,0 +1,39 @@
+{
+  "taskName": "notitle",
+  "hosts": [
+    {
+      "serverProfile": "SLES_BOND_2NIC_2NET",
+      "hostName": "host95",
+      "osPackage": "HPE-SLES15.iso",
+      "kickstartFile": "autoinst_bond.xml",
+      "httpProxy": "http://proxy111.houston.corp.net:8080",
+      "httpsProxy": "http://web-proxy11.corp.hpecorp.net:8080",
+      "noProxy": "",
+      "networks": [
+      {
+	"ipAddr": "10.188.210.95",
+	"netmask": "255.255.255.0",
+	"gateway": "10.188.210.1",
+	"dns": "10.188.0.2",
+	"bootProto": "static",
+	"nic1": {
+          "connectionName": "nic0"
+	},
+	"nic2": {
+          "connectionName": "nic1"
+	}
+      }
+      ],
+      "osDrive": {
+        "driveName": "localosdrive"
+      }
+    }
+  ],
+  "osPackage": "HPE-SLES15.iso",
+  "deploymentMode": "hpesynergy",
+  "createServerProfile": false,
+  "oneviewDetails": {
+    "ovName": "syn210",
+    "ovSPT": "SLES15-SPT"
+  }
+}

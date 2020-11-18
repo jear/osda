@@ -1,0 +1,83 @@
+{
+  "taskName": "notitle",
+  "hosts": [
+    {
+      "iloIPAddr": "10.188.2.16",
+      "iloUser": "v0175usradmin",
+      "iloPassword": "iLO{assword",
+      "hostName": "host84",
+      "osPackage": "HPE-SLES15.iso",
+      "osLicenseKey": "",
+      "sshKey": "",
+      "kickstartFile": "",
+      "httpProxy": "",
+      "httpsProxy": "",
+      "noProxy": "",
+      "networks": [
+      {
+	"ipAddr": "10.188.175.84",
+	"netmask": "255.255.255.0",
+	"gateway": "10.188.175.1",
+	"dns": "10.188.0.2",
+	"bootProto": "static",
+	"nic1": {
+	  "adapterId": "1",
+	  "portId": 1
+	},
+	"nic2": {
+	  "adapterId": "1",
+	  "portId": 2
+	}
+      }
+      ],
+      "osDrive": {
+        "logicalDrive": {
+          "driveTechnology": "SATA SSD",
+          "capacity": "200",
+          "capacityUnit": "GB",
+          "raidLevel": "Raid1",
+          "operation": "DELETE_ALL_AND_CREATE"
+        }
+      }
+    },
+    {
+      "iloIPAddr": "10.188.2.12",
+      "iloUser": "v0175usradmin",
+      "iloPassword": "iLO{assword",
+      "hostName": "host85",
+      "osPackage": "HPE-SLES15.iso",
+      "osLicenseKey": "",
+      "sshKey": "",
+      "kickstartFile": "",
+      "httpProxy": "",
+      "httpsProxy": "",
+      "noProxy": "",
+      "networks": [
+      {
+	"ipAddr": "10.188.175.85",
+	"netmask": "255.255.255.0",
+	"gateway": "10.188.175.1",
+	"dns": "10.188.0.2",
+	"bootProto": "static",
+	"vlans": "210"
+	"nic1": {
+	  "adapterId": "1",
+	  "portId": 1
+	}
+      }
+      ],
+      "osDrive": {
+        "logicalDrive": {
+          "driveTechnology": "SAS HDD",
+          "capacity": "1",
+          "capacityUnit": "TB",
+          "raidLevel": "Raid1",
+          "logicalDriveNumber": 1,
+          "operation": "DELETE_ALL_AND_CREATE"
+        }
+      }
+    }
+  ], 
+  "deploymentMode": "hpeilo",
+  "oneviewDetails": {}
+}

@@ -1,0 +1,34 @@
+{
+  "taskName": "notitle",
+  "hosts": [
+    {
+      "iloIPAddr": "10.188.2.16",
+      "iloUser": "v0175usradmin",
+      "iloPassword": "HP!nvent123",
+      "hostName": "host57",
+      "ipAddr": "10.188.175.57",
+      "netmask": "255.255.255.0",
+      "gateway": "10.188.175.1",
+      "dns1": "10.188.0.2",
+      "dns2": "10.188.0.3",
+      "bootProto": "static",
+      "osPackage": "CentOS-7-x86_64-Minimal-1810",
+      "mgmtNIC": {
+        "adapterId": "1",
+        "portId": 1
+      },
+      "osDrive": {
+        "logicalDrive": {
+          "driveTechnology": "SATA SSD",
+          "capacity": "200",
+          "capacityUnit": "GB",
+          "raidLevel": "RAID1",
+          "operation": "DELETE_ALL_AND_CREATE"
+        }
+      }
+    }
+  ],
+  "osPackage": "CentOS-7-x86_64-Minimal-1810",
+  "deploymentMode": "hpeilo",
+  "oneviewDetails": {}
+}

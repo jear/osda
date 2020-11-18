@@ -1,0 +1,20 @@
+{
+  "taskName": "notitle",
+  "hosts": [
+    {
+      "iloIPAddr": "10.188.2.16",
+      "iloUser": "v0175usradmin",
+      "iloPassword": "HP!nvent123",
+      "osDrive": {
+        "logicalDrive": {
+          "driveTechnology": "SATA SSD",
+          "capacity": "200",
+          "capacityUnit": "GB",
+          "raidLevel": "Raid1",
+          "operation": "DELETE"
+        }
+      }
+    }
+  ], 
+  "deploymentMode": "hpeilo"
+}

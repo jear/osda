@@ -1,0 +1,11 @@
+[Unit]
+Description=Service of OSDA Server
+After=multi-user.target
+
+[Service]
+WorkingDirectory=/opt/hpe/osda
+ExecStart=/opt/hpe/osda/bin/python /opt/hpe/osda/bin/osda-server
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

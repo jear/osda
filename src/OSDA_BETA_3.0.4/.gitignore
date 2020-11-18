@@ -1,0 +1,13 @@
+*.crt
+*.pyc
+*.swp
+__pycache__
+node_modules
+.idea
+release
+config
+certs
+*.log
+HPEOSDA_alpha*
+build
+*.egg*

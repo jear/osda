@@ -1,0 +1,31 @@
+{
+  "taskName": "notitle",
+  "hosts": [
+    {
+      "iloIPAddr": "10.188.2.16",
+      "iloUser": "v0175usradmin",
+      "iloPassword": "HP!nvent123",
+      "hostName": "host155",
+      "ipAddr": "10.188.175.57",
+      "netmask": "255.255.255.0",
+      "gateway": "10.188.175.1",
+      "dns1": "10.188.0.2",
+      "dns2": "10.188.0.3",
+      "bootProto": "static",
+      "osPackage": "VMware_ESXi_7.0.0_15843807_HPE_700.0.0.10.5.0.108_April2020",
+      "mgmtNIC": {
+        "adapterId": "1",
+        "portId": 1
+      },
+      "osDrive": {
+        "logicalDrive": {
+          "logicalDriveNumber": 1,
+          "operation": "USE_EXISTING"
+        }
+      }
+    }
+  ],
+  "osPackage": "VMware_ESXi_7.0.0_15843807_HPE_700.0.0.10.5.0.108_April2020",
+  "deploymentMode": "hpeilo",
+  "oneviewDetails": {}
+}
