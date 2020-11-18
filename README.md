@@ -9,9 +9,10 @@ Contains 2 sources:
 ```bash
 # Install the prerequisite
 yum update -y
-yum install -y mkisofs xorriso kpartx python3-setuptools httpd python3 python3-pip lsof
+yum install -y mkisofs xorriso kpartx python3-setuptools httpd python3 python3-pip lsof git
 pip3 install hpOneView
 pip3 install hpeOneView==5.5.0 (optional)
+git clone https://github.com/tdovan/osda.git
 
 # open the port on the firewall
 firewall-cmd --list-all
