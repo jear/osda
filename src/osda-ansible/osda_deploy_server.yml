@@ -1,0 +1,6 @@
+- hosts: all
+
+  tasks:
+  - import_tasks: validate_input.yml
+  - import_tasks: deploy.yml
+  - import_tasks: wait_for_tasks.yml

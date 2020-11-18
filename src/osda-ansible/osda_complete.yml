@@ -1,0 +1,4 @@
+  - debug:
+      msg: "Successfully deployed OS using OSDA"
+
+  - meta: end_play

@@ -1,0 +1,33 @@
+  - debug:
+      msg: "One or more hosts failed in the deployment"
+
+  - name: "Get All Tasks"
+    uri:
+      body_format: json
+      method: GET
+      url: "{{ task_uri }}"
+      user: "{{ osda_username | default(ansible_user) }}"
+      password: "{{ osda_password | default(ansible_user) }}"
+      use_proxy: "{{ use_proxy | default('no') }}"
+    register: task_list
+    no_log: True
+
+  - name: "Details of task {{ task_id }}:"
+    debug:
+      msg: "{{ task_list.json.result }}"
+    when: task_id is defined and task_list.json.result is defined
+
+  - name: "Array of failed hosts: "
+    set_fact:
+      failedHosts: "{{ failedHosts | default([])  + [ item.hostName ] }}"
+      failedMessage: "{{ failedMessage | default([])  + [ item.message ] }}"
+    when: task_list.json.result is defined and item.status != "Complete"
+    loop: "{{ task_list.json.result.subTasks }}"
+
+  - name: "List of failed hosts: "
+    fail:
+      msg: "{{ item.0 }} : {{ item.1 }}"
+    when: failedHosts is defined
+    with_together:
+    - "{{ failedHosts }}"
+    - "{{ failedMessage }}"

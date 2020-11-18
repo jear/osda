@@ -1,0 +1,40 @@
+  - set_fact:
+      task_uri: "http://{{ osda_ip_address }}:{{ osda_port | default(5000) }}/rest/tasks/{{ task_id }}"
+
+  - name: "Get All Tasks"
+    uri:
+      body_format: json
+      method: GET
+      url: "{{ task_uri }}"
+      user: "{{ osda_username | default(ansible_user) }}"
+      password: "{{ osda_password | default(ansible_user) }}"
+      use_proxy: "{{ use_proxy | default('no') }}"
+    register: task_list
+    no_log: True
+
+  - debug:
+      msg: "Overall status of the task: {{ task_list.json.result.status }}"
+    when: task_list.json.result is defined
+
+  - include_tasks: osda_fail.yml
+    when: task_list.json.result.status == "Failed" or task_list.json.result.status == "Error"
+
+  - include_tasks: osda_complete.yml
+    when: task_list.json.result.status == "Completed"
+
+  - pause:
+      seconds: 30
+
+  - fail:
+      msg: "Reached maximum retries and one or more servers didnt come online"
+    when: (retry_count | int) > (max_retries | int)
+
+  - name: Display retry count 
+    debug:
+      msg: "Retry Count: {{ retry_count }} (max retries: {{ max_retries }})"
+
+  - set_fact:
+      retry_count: "{{ retry_count | int + 1}}"
+
+  - include_tasks: wait_for_tasks.yml
+    when: task_list.json.result.status == "Running"
