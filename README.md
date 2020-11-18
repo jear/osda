@@ -12,29 +12,48 @@ yum update -y
 yum install -y mkisofs xorriso kpartx python3-setuptools httpd python3 python3-pip lsof git
 pip3 install hpOneView
 pip3 install hpeOneView==5.5.0 (optional)
-git clone https://github.com/tdovan/osda.git
-
-# open the port on the firewall
-firewall-cmd --list-all
-firewall-cmd --add-port=5000/tcp --permanent
-firewall-cmd --add-port=80/tcp --permanent
 
 # Install OSDA
-cd src/OSDA_BETA_3.0.4
+git clone https://github.com/tdovan/osda.git
+cd osda/src/OSDA_BETA_3.0.4
+chmod 755 update_osda.sh
 ./update_osda.sh
+> enter the ip of your vm
 it does
 > python3 setup.py install
 > systemctl daemon-reload
 > systemctl restart osda
 > systemctl status osda
 
-chmod 755 configureWeb.sh
-./configureWeb.sh
-
 lsof -i :5000
 lsof -i :80
 
+chmod 755 configureWeb.sh
+./configureWeb.sh
+# open the port on the firewall
+firewall-cmd --list-all
+firewall-cmd --add-port=5000/tcp --permanent
+firewall-cmd --add-port=80/tcp --permanent
+systemctl reload firewalld
+
+you're done: go to http://osda
+
 ```
+
+## File directory
+
+| Path | Description |
+| --- | --- |
+| /opt/hpe/osda/bin | binary |
+| /opt/hpe/osda/data/activities | logs of activities |
+| /opt/hpe/osda/data/certs | certifcate of oneview retrieve when endpoint added |
+| /opt/hpe/osda/data/config | configuration of OSDA |
+| /opt/hpe/osda/data/kickstarts | list of kickstart |
+| /opt/hpe/osda/data/scratch | init config |
+| /opt/hpe/osda/etc/config.ini | configuration of OSDA |
+| /opt/hpe/osda/lib | python library |
+| /opt/hpe/osda/log/OSDA | main log file |
+| /var/www/html/ | http repo for ISO and IMG(ks) mounted by USB Virtual Media |
 
 ## Tips
 
