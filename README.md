@@ -46,7 +46,7 @@ you're done: go to http://osda
 yum install epel-release -y
 yum install ansible -y
 cd osda/src/osda-ansible
-vi data/deploy.json (to add your ESXi configuration)
+edit the data/deploy.json (to add your ESXi configuration - refer to the example of json template)
 
 ipaddr=$(/sbin/ifconfig|grep inet|head -1|sed 's/\:/ /'|awk '{print $2}' | grep -v '127.0.0.1')
 sed -i 's/<osda_ip_address/$ipaddr/' inventory/host_vars/OSDA.yml
@@ -84,6 +84,7 @@ mount -t auto -o loop,offset=$((2048*512)) /tmp/1.img /mnt/img/
 ```
 
 ```json
+# Template of json file
 {
   "taskName": "1-node",
   "hosts": [
