@@ -1,8 +1,9 @@
 # OSDA (Operating System Deployment Automation)
 
 Contains 2 sources:
--- OSDA_BETA_3.0.4: source code of OSDA
--- osda-ansible: ansible playbooks to call OSDA API and provision server and install OS
+- OSDA_BETA_3.0.4: source code of OSDA
+- OSDA_BETA_3.0.7: source code of OSDA - adding affinity (frame and bay)
+- osda-ansible: ansible playbooks to call OSDA API and provision server and install OS
 
 ## Install OSDA on CentOS 7.8
 
